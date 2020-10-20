@@ -81,3 +81,25 @@ until breakpoint == 0 do
         puts "#{player_1} win"
         break
     end
+
+    # repeat loop for player 2
+    puts "#{player_2} turn please choose between #{board}"
+    
+    while true
+        choice_2 = gets.chomp.to_i
+        if  board.include?(choice_2)
+            board_2 << choice_2
+            board.delete(choice_2)
+            breakpoint -= 1
+            break
+        else
+            puts "please choose between #{board}"
+        end
+    end
+    if board_2 == [1,2,3] or board_2 == [4,5,6] or board_2 == [7,8,9] or board_2 == [3,5,7] or board_2 ==[1,5,9] or board_2 == [3,2,1] or board_2 == [6,5,4] or board_2 == [9,8,7]
+        puts "#{player_2} win"
+        break
+    end
+
+    #if game ended, ask if game wants to be played again.
+end
