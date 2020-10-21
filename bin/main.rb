@@ -9,8 +9,11 @@ puts 'Welcome to tic tac toe, Please enter the player names on consecutive lines
 # rubocop:todo Naming/VariableNumber
 while player_1 = gets.chomp # rubocop:todo Lint/AssignmentInCondition
   # rubocop:enable Naming/VariableNumber
+  puts "Welcome #{player_1}"
+  sleep(1)
 
   player_2 = gets.chomp # rubocop:todo Naming/VariableNumber
+  puts "Welcome #{player_2}"
 
   if player_1.empty? and player_2.empty?
     puts 'Please enter your names'
@@ -40,6 +43,7 @@ sleep(1)
 puts 2
 sleep(1)
 puts 1
+sleep(1)
 # Create and Display the game board
 
 board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -58,18 +62,22 @@ def game_board(board_tokens)
   puts " #{board_tokens[6]} | #{board_tokens[7]} | #{board_tokens[8]} "
 end
 
-
 breakpoint = board.length
 
-puts " 1 | 2 | 3"
+puts 'This is your game board.'
+puts 'The numbers represent the cell you can choose'
+
+puts ' 1 | 2 | 3'
 puts '-----------'
-puts " 4 | 5 | 6 "
+puts ' 4 | 5 | 6 '
 puts '-----------'
-puts " 7 | 8 | 9 "
+puts ' 7 | 8 | 9 '
+
+sleep(2)
 
 until breakpoint.zero?
 
-  puts "#{player_1} turn, please choose between #{board}"
+  puts "#{player_1} it is your turn, please choose between #{board}"
 
   loop do
     choice_1 = gets.chomp.to_i # rubocop:todo Naming/VariableNumber
@@ -78,11 +86,15 @@ until breakpoint.zero?
       board.delete(choice_1)
       board_1.each { |token| board_tokens[token - 1] = 'X' }
       breakpoint -= 1
+
       break
     else
+      puts 'The selected cell is invalid!'
       puts "please choose between #{board}"
     end
   end
+
+  sleep(1)
 
   game_board(board_tokens)
 
@@ -91,10 +103,8 @@ until breakpoint.zero?
     break
   end
 
-  # rubocop:todo Style/MultipleComparison
-  if board_1 == [1, 2, 3] or board_1 == [4, 5, 6] or board_1 == [7, 8, 9] or board_1 == [3, 5, 7] or board_1 == [1, 5, 9] or board_1 == [3, 2, 1] or board_1 == [6, 5, 4] or board_1 == [9, 8, 7]
-    # rubocop:enable Style/MultipleComparison
-    puts "#{player_1} win"
+  if board_1 == [1, 2, 3] or board_1 == [4, 5, 6] or board_1 == [7, 8, 9] or board_1 == [3, 5, 7] or board_1 == [1, 5, 9] or board_1 == [1, 4, 7] or board_1 == [2, 5, 8] or board_1 == [3, 6, 9] or board_2 == [3, 2, 1]
+    puts "#{player_1}, you are the winner!"
     break
   end
   puts "#{player_2} turn please choose between #{board}"
@@ -108,6 +118,7 @@ until breakpoint.zero?
       breakpoint -= 1
       break
     else
+      puts 'The selected cell is invalid or has already been taken!'
       puts "please choose between #{board}"
     end
   end
@@ -115,10 +126,10 @@ until breakpoint.zero?
   game_board(board_tokens)
 
   # rubocop:todo Style/MultipleComparison
-  if board_2 == [1, 2, 3] or board_2 == [4, 5, 6] or board_2 == [7, 8, 9] or board_2 == [3, 5, 7] or board_2 == [1, 5, 9] or board_2 == [3, 2, 1] or board_2 == [6, 5, 4] or board_2 == [9, 8, 7]
-    # rubocop:enable Style/MultipleComparison
-    puts "#{player_2} win"
-    break
-  end
-  
+  next unless board_2 == [1, 2, 3] or board_2 == [4, 5, 6] or board_2 == [7, 8, 9] or board_2 == [3, 5, 7] or board_2 == [1, 5, 9] or board_2 == [1, 4, 7] or board_2 == [2, 5, 8] or board_2 == [3, 6, 9] or board_2 == [3, 2, 1]
+
+  # rubocop:enable Style/MultipleComparison
+  puts "#{player_2}, you are the winner!"
+  break
+
 end
