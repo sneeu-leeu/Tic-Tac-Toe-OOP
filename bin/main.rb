@@ -6,6 +6,9 @@
 
 puts 'Welcome to tic tac toe, Please enter the player names on consecutive lines.'
 
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
+
 # rubocop:todo Naming/VariableNumber
 while player_1 = gets.chomp # rubocop:todo Lint/AssignmentInCondition
   # rubocop:enable Naming/VariableNumber
@@ -23,7 +26,7 @@ while player_1 = gets.chomp # rubocop:todo Lint/AssignmentInCondition
     puts 'Please enter a distinctive name'
 
   elsif !player_1.empty? and !player_2.empty? # if the player_1 and player_2 is not empty,
-    puts "happy gaming"
+    puts 'happy gaming'
     # break we break the loop
     break
 
@@ -56,12 +59,12 @@ board_1 = [] # rubocop:todo Naming/VariableNumber
 
 board_2 = [] # rubocop:todo Naming/VariableNumber
 
-def game_board(board_tokens)
-  puts " #{board_tokens[0] || " "} | #{board_tokens[1] || " "} | #{board_tokens[2] || " "} "
+def game_board(board_tokens) # rubocop:todo Metrics/CyclomaticComplexity
+  puts " #{board_tokens[0] || ' '} | #{board_tokens[1] || ' '} | #{board_tokens[2] || ' '} "
   puts '-----------'
-  puts " #{board_tokens[3] || " "} | #{board_tokens[4] || " "} | #{board_tokens[5] || " "} "
+  puts " #{board_tokens[3] || ' '} | #{board_tokens[4] || ' '} | #{board_tokens[5] || ' '} "
   puts '-----------'
-  puts " #{board_tokens[6] || " "} | #{board_tokens[7] || " "} | #{board_tokens[8] || " "} "
+  puts " #{board_tokens[6] || ' '} | #{board_tokens[7] || ' '} | #{board_tokens[8] || ' '} "
 end
 
 breakpoint = board.length
@@ -135,3 +138,5 @@ until breakpoint.zero?
   break
 
 end
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
