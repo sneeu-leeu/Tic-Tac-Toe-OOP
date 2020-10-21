@@ -58,10 +58,19 @@ def game_board(board_tokens)
   puts " #{board_tokens[6]} | #{board_tokens[7]} | #{board_tokens[8]} "
 end
 
+
 breakpoint = board.length
 
+puts " 1 | 2 | 3"
+puts '-----------'
+puts " 4 | 5 | 6 "
+puts '-----------'
+puts " 7 | 8 | 9 "
+
 until breakpoint.zero?
+
   puts "#{player_1} turn, please choose between #{board}"
+
   loop do
     choice_1 = gets.chomp.to_i # rubocop:todo Naming/VariableNumber
     if board.include?(choice_1)
@@ -74,6 +83,8 @@ until breakpoint.zero?
       puts "please choose between #{board}"
     end
   end
+
+  game_board(board_tokens)
 
   if breakpoint.zero?
     puts 'the game ended in a draw'
@@ -101,11 +112,13 @@ until breakpoint.zero?
     end
   end
 
+  game_board(board_tokens)
+
   # rubocop:todo Style/MultipleComparison
   if board_2 == [1, 2, 3] or board_2 == [4, 5, 6] or board_2 == [7, 8, 9] or board_2 == [3, 5, 7] or board_2 == [1, 5, 9] or board_2 == [3, 2, 1] or board_2 == [6, 5, 4] or board_2 == [9, 8, 7]
     # rubocop:enable Style/MultipleComparison
     puts "#{player_2} win"
     break
   end
-  game_board(board_tokens)
+  
 end
