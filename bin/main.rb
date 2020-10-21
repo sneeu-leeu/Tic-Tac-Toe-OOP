@@ -14,6 +14,7 @@ while player_1 = gets.chomp # rubocop:todo Lint/AssignmentInCondition
 
   player_2 = gets.chomp # rubocop:todo Naming/VariableNumber
   puts "Welcome #{player_2}"
+  sleep(1)
 
   if player_1.empty? and player_2.empty?
     puts 'Please enter your names'
@@ -22,7 +23,7 @@ while player_1 = gets.chomp # rubocop:todo Lint/AssignmentInCondition
     puts 'Please enter a distinctive name'
 
   elsif !player_1.empty? and !player_2.empty? # if the player_1 and player_2 is not empty,
-    puts "welcome #{player_1} and #{player_2}, happy gaming"
+    puts "happy gaming"
     # break we break the loop
     break
 
@@ -33,9 +34,10 @@ end
 
 # Assign either X or O to a player:
 # either random or always P1 = X, ect.
+sleep(1)
 puts "#{player_1} you are X"
 puts "#{player_2} you are 0"
-
+sleep(1)
 # countdown to the game:
 puts 'The game commences in:'
 puts 3
@@ -55,11 +57,11 @@ board_1 = [] # rubocop:todo Naming/VariableNumber
 board_2 = [] # rubocop:todo Naming/VariableNumber
 
 def game_board(board_tokens)
-  puts " #{board_tokens[0]} | #{board_tokens[1]} | #{board_tokens[2]} "
+  puts " #{board_tokens[0] || " "} | #{board_tokens[1] || " "} | #{board_tokens[2] || " "} "
   puts '-----------'
-  puts " #{board_tokens[3]} | #{board_tokens[4]} | #{board_tokens[5]} "
+  puts " #{board_tokens[3] || " "} | #{board_tokens[4] || " "} | #{board_tokens[5] || " "} "
   puts '-----------'
-  puts " #{board_tokens[6]} | #{board_tokens[7]} | #{board_tokens[8]} "
+  puts " #{board_tokens[6] || " "} | #{board_tokens[7] || " "} | #{board_tokens[8] || " "} "
 end
 
 breakpoint = board.length
