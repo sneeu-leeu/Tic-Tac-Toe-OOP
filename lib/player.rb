@@ -1,8 +1,25 @@
 class Players
-  attr_accessor :player_1, :player_2
+  attr_accessor :name
+  def initialize(name)
+    @name = name
+  end
+end
 
-  def initialize (player_1, player_2)
-    @player_1 = player_1
-    @player_2 = player_2
+class Compare 
+  def initialize(item_1, item_2)
+    @item_1 = item_1
+    @item_2 = item_2
+  end
+
+  def is_empty?
+    @item_1.empty? && @item_2.empty?
+  end
+
+  def is_equal?
+    @item_1 == @item_2
+  end
+
+  def is_missing?
+    @item_1.empty? || @item_2.empty?
   end
 end
