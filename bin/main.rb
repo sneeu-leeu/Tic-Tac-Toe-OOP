@@ -4,23 +4,24 @@ require_relative '../lib/logic'
 require_relative '../lib/board'
 
 puts 'Welcome to tic tac toe'
-puts 
 puts "A simple game developed by Tahiry & Stephan"
-sleep (1)
+puts 
+sleep (2)
 
 while true
   puts "Player 1, Please enter your name"
 
   player_1 = Players.new(gets.chomp) 
   
-  
+  puts
   puts "Welcome #{player_1.name}" unless player_1.name.empty?
-  sleep(1)
-
+ 
+  puts
   puts "Player 2, Please enter your name"
 
-  player_2 = Players.new(gets.chomp) 
+  player_2 = Players.new(gets.chomp)
 
+  puts
   puts "Welcome #{player_2.name}" unless (player_2.name.empty? || player_1.name.empty?)  || player_2.name == player_1.name 
   sleep(1)
 
@@ -43,9 +44,7 @@ while true
 end
 
 sleep(1)
-puts "#{player_1.name} your weapon is X"
-puts "#{player_2.name} your weapon is 0"
-sleep(1)
+
 
 
 
@@ -61,7 +60,19 @@ board_2 = []
 
 breakpoint = board.length
 
-tokens.initial_board
+puts 'This is your game board.'
+    puts 'The numbers represent the cell you can choose'
+    
+    puts
+    puts ' 1 | 2 | 3'
+    puts '-----------'
+    puts ' 4 | 5 | 6 '
+    puts '-----------'
+    puts ' 7 | 8 | 9 '
+    puts
+    puts "#{player_1.name} your weapon is X"
+    puts
+    puts "#{player_2.name} your weapon is 0"
 sleep(2)
 
 puts
