@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require_relative '../lib/player'
+require_relative '../lib/logic'
 
 puts 'Welcome to tic tac toe, Please enter the player names on consecutive lines.'
 
@@ -37,14 +38,11 @@ while player_1 = Players.new(gets.chomp) # rubocop:todo Lint/AssignmentInConditi
 
 end
 
+sleep(1)
+puts "#{player_1.name} you are X"
+puts "#{player_2.name} you are 0"
+sleep(1)
 
-# Assign either X or O to a player:
-# either random or always P1 = X, ect.
-sleep(1)
-puts "#{player_1} you are X"
-puts "#{player_2} you are 0"
-sleep(1)
-# countdown to the game:
 puts 'The game commences in:'
 puts 3
 sleep(1)
@@ -52,7 +50,7 @@ puts 2
 sleep(1)
 puts 1
 sleep(1)
-# Create and Display the game board
+
 
 board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -85,16 +83,16 @@ sleep(2)
 
 until breakpoint.zero?
 
-  puts "#{player_1} it is your turn, please choose between #{board}"
+  puts "#{player_1.name} it is your turn, please choose between #{board}"
 
   loop do
-    choice_1 = gets.chomp.to_i # rubocop:todo Naming/VariableNumber
-    if board.include?(choice_1)
-      board_1 << choice_1
-      board.delete(choice_1)
+    choice_1 = Position.new(gets.chomp.to_i, board) # rubocop:todo Naming/VariableNumber
+    operation = ArrayOperation.new(board, choice_1.choice)
+    if choice_1.inside?
+      board_1 << choice_1.choice
+      operation.to_deleteArr
       board_1.each { |token| board_tokens[token - 1] = 'X' }
       breakpoint -= 1
-
       break
     else
       puts 'The selected cell is invalid!'
@@ -104,6 +102,7 @@ until breakpoint.zero?
 
   sleep(1)
 
+
   game_board(board_tokens)
 
   if breakpoint.zero?
@@ -111,17 +110,22 @@ until breakpoint.zero?
     break
   end
 
-  if board_1 == [1, 2, 3] or board_1 == [4, 5, 6] or board_1 == [7, 8, 9] or board_1 == [3, 5, 7] or board_1 == [1, 5, 9] or board_1 == [1, 4, 7] or board_1 == [2, 5, 8] or board_1 == [3, 6, 9] or board_2 == [3, 2, 1]
-    puts "#{player_1}, you are the winner!"
+  
+  first_player = Logic.new(board_1)
+
+  if first_player.winning_position?
+    puts "#{player_1.name}, you are the winner!"
     break
   end
-  puts "#{player_2} turn please choose between #{board}"
+
+  puts "#{player_2.name} turn please choose between #{board}"
 
   loop do
-    choice_2 = gets.chomp.to_i # rubocop:todo Naming/VariableNumber
-    if board.include?(choice_2)
-      board_2 << choice_2
-      board.delete(choice_2)
+    choice_2 = Position.new(gets.chomp.to_i, board) # rubocop:todo Naming/VariableNumber
+    operation = ArrayOperation.new(board, choice_2.choice)
+    if choice_2.inside?
+      board_2 << choice_2.choice
+      operation.to_deleteArr
       board_2.each { |token| board_tokens[token - 1] = 'O' }
       breakpoint -= 1
       break
@@ -131,15 +135,14 @@ until breakpoint.zero?
     end
   end
 
-  game_board(board_tokens)
+  #game_board(board_tokens)
 
-  # rubocop:todo Style/MultipleComparison
-  next unless board_2 == [1, 2, 3] or board_2 == [4, 5, 6] or board_2 == [7, 8, 9] or board_2 == [3, 5, 7] or board_2 == [1, 5, 9] or board_2 == [1, 4, 7] or board_2 == [2, 5, 8] or board_2 == [3, 6, 9] or board_2 == [3, 2, 1]
+  second_player = Logic.new(board_2)
 
-  # rubocop:enable Style/MultipleComparison
-  puts "#{player_2}, you are the winner!"
-  break
-
+  if second_player.winning_position?
+    puts "#{player_2.name}, you are the winner!"
+    break
+  end
 end
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
