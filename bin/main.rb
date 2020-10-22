@@ -4,34 +4,33 @@ require_relative '../lib/logic'
 require_relative '../lib/board'
 
 puts 'Welcome to tic tac toe'
-puts 
-puts "A simple game developed by Tahiry & Stephan"
-sleep (1)
+puts
+puts 'A simple game developed by Tahiry & Stephan'
+sleep 1
 
-while true
-  puts "Player 1, Please enter your name"
+while true # rubocop:todo Lint/LiteralAsCondition
+  puts 'Player 1, Please enter your name'
 
-  player_1 = Players.new(gets.chomp) 
-  
-  
+  player_1 = Players.new(gets.chomp) # rubocop:todo Naming/VariableNumber
+
   puts "Welcome #{player_1.name}" unless player_1.name.empty?
   sleep(1)
 
-  puts "Player 2, Please enter your name"
+  puts 'Player 2, Please enter your name'
 
-  player_2 = Players.new(gets.chomp) 
+  player_2 = Players.new(gets.chomp) # rubocop:todo Naming/VariableNumber
 
-  puts "Welcome #{player_2.name}" unless (player_2.name.empty? || player_1.name.empty?)  || player_2.name == player_1.name 
+  puts "Welcome #{player_2.name}" unless (player_2.name.empty? || player_1.name.empty?) || player_2.name == player_1.name
   sleep(1)
 
   compare = Compare.new(player_1.name, player_2.name)
-    
-  if compare.is_equal? && !compare.is_empty? 
-    puts 'Please enter a distinctive name'  
+
+  if compare.is_equal? && !compare.is_empty?
+    puts 'Please enter a distinctive name'
 
   elsif compare.is_empty?
-    puts 'Please enter your names'   
-    
+    puts 'Please enter your names'
+
   elsif compare.is_missing?
     puts 'Both names are required'
 
@@ -47,17 +46,15 @@ puts "#{player_1.name} your weapon is X"
 puts "#{player_2.name} your weapon is 0"
 sleep(1)
 
-
-
 board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 board_tokens = []
 
 tokens = Board.new(board_tokens)
 
-board_1 = [] 
+board_1 = [] # rubocop:todo Naming/VariableNumber
 
-board_2 = [] 
+board_2 = [] # rubocop:todo Naming/VariableNumber
 
 breakpoint = board.length
 
@@ -78,7 +75,7 @@ until breakpoint.zero?
   puts "#{player_1.name} it is your turn, please choose between #{board}"
 
   loop do
-    choice_1 = Position.new(gets.chomp.to_i, board) 
+    choice_1 = Position.new(gets.chomp.to_i, board) # rubocop:todo Naming/VariableNumber
     operation = ArrayOperation.new(board, choice_1.choice)
     if choice_1.inside?
       board_1 << choice_1.choice
@@ -111,7 +108,7 @@ until breakpoint.zero?
   puts "#{player_2.name} turn please choose between #{board}"
 
   loop do
-    choice_2 = Position.new(gets.chomp.to_i, board) 
+    choice_2 = Position.new(gets.chomp.to_i, board) # rubocop:todo Naming/VariableNumber
     operation = ArrayOperation.new(board, choice_2.choice)
     if choice_2.inside?
       board_2 << choice_2.choice
