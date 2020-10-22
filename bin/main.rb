@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
-
-# Mindmap / Pseudo code
-
-# Player Input:
+require_relative '../lib/player'
 
 puts 'Welcome to tic tac toe, Please enter the player names on consecutive lines.'
 
@@ -10,30 +7,36 @@ puts 'Welcome to tic tac toe, Please enter the player names on consecutive lines
 # rubocop:disable Metrics/PerceivedComplexity
 
 # rubocop:todo Naming/VariableNumber
-while player_1 = gets.chomp # rubocop:todo Lint/AssignmentInCondition
+while player_1 = Players.new(gets.chomp) # rubocop:todo Lint/AssignmentInCondition
+  
   # rubocop:enable Naming/VariableNumber
-  puts "Welcome #{player_1}"
+
+  puts "Welcome #{player_1.name}" unless player_1.name.empty?
   sleep(1)
 
-  player_2 = gets.chomp # rubocop:todo Naming/VariableNumber
-  puts "Welcome #{player_2}"
+  player_2 = Players.new(gets.chomp) # rubocop:todo Naming/VariableNumber
+
+  puts "Welcome #{player_2.name}" unless (player_2.name.empty? || player_1.name.empty?)  || player_2.name == player_1.name 
   sleep(1)
 
-  if player_1.empty? and player_2.empty?
-    puts 'Please enter your names'
+  compare = Compare.new(player_1.name, player_2.name)
+    
+  if compare.is_equal? && !compare.is_empty? 
+    puts 'Please enter a distinctive name'  
 
-  elsif player_1 == player_2 # if the player name is equal, the program should return
-    puts 'Please enter a distinctive name'
-
-  elsif !player_1.empty? and !player_2.empty? # if the player_1 and player_2 is not empty,
-    puts 'happy gaming'
-    # break we break the loop
-    break
-
-  else # needs  both names
+  elsif compare.is_empty?
+    puts 'Please enter your names'   
+    
+  elsif compare.is_missing?
     puts 'Both names are required'
+
+  else
+    puts 'happy gaming'
+    break
   end
+
 end
+
 
 # Assign either X or O to a player:
 # either random or always P1 = X, ect.
