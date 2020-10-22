@@ -1,21 +1,25 @@
 #!/usr/bin/env ruby
 require_relative '../lib/player'
 require_relative '../lib/logic'
+require_relative '../lib/board'
 
-puts 'Welcome to tic tac toe, Please enter the player names on consecutive lines.'
+puts 'Welcome to tic tac toe'
+puts 
+puts "A simple game developed by Tahiry & Stephan"
+sleep (1)
 
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/PerceivedComplexity
+while true
+  puts "Player 1, Please enter your name"
 
-# rubocop:todo Naming/VariableNumber
-while player_1 = Players.new(gets.chomp) # rubocop:todo Lint/AssignmentInCondition
+  player_1 = Players.new(gets.chomp) 
   
-  # rubocop:enable Naming/VariableNumber
-
+  
   puts "Welcome #{player_1.name}" unless player_1.name.empty?
   sleep(1)
 
-  player_2 = Players.new(gets.chomp) # rubocop:todo Naming/VariableNumber
+  puts "Player 2, Please enter your name"
+
+  player_2 = Players.new(gets.chomp) 
 
   puts "Welcome #{player_2.name}" unless (player_2.name.empty? || player_1.name.empty?)  || player_2.name == player_1.name 
   sleep(1)
@@ -39,10 +43,28 @@ while player_1 = Players.new(gets.chomp) # rubocop:todo Lint/AssignmentInConditi
 end
 
 sleep(1)
-puts "#{player_1.name} you are X"
-puts "#{player_2.name} you are 0"
+puts "#{player_1.name} your weapon is X"
+puts "#{player_2.name} your weapon is 0"
 sleep(1)
 
+
+
+board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+board_tokens = []
+
+tokens = Board.new(board_tokens)
+
+board_1 = [] 
+
+board_2 = [] 
+
+breakpoint = board.length
+
+tokens.initial_board
+sleep(2)
+
+puts
 puts 'The game commences in:'
 puts 3
 sleep(1)
@@ -51,42 +73,12 @@ sleep(1)
 puts 1
 sleep(1)
 
-
-board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-board_tokens = []
-
-board_1 = [] # rubocop:todo Naming/VariableNumber
-
-board_2 = [] # rubocop:todo Naming/VariableNumber
-
-def game_board(board_tokens) # rubocop:todo Metrics/CyclomaticComplexity
-  puts " #{board_tokens[0] || ' '} | #{board_tokens[1] || ' '} | #{board_tokens[2] || ' '} "
-  puts '-----------'
-  puts " #{board_tokens[3] || ' '} | #{board_tokens[4] || ' '} | #{board_tokens[5] || ' '} "
-  puts '-----------'
-  puts " #{board_tokens[6] || ' '} | #{board_tokens[7] || ' '} | #{board_tokens[8] || ' '} "
-end
-
-breakpoint = board.length
-
-puts 'This is your game board.'
-puts 'The numbers represent the cell you can choose'
-
-puts ' 1 | 2 | 3'
-puts '-----------'
-puts ' 4 | 5 | 6 '
-puts '-----------'
-puts ' 7 | 8 | 9 '
-
-sleep(2)
-
 until breakpoint.zero?
 
   puts "#{player_1.name} it is your turn, please choose between #{board}"
 
   loop do
-    choice_1 = Position.new(gets.chomp.to_i, board) # rubocop:todo Naming/VariableNumber
+    choice_1 = Position.new(gets.chomp.to_i, board) 
     operation = ArrayOperation.new(board, choice_1.choice)
     if choice_1.inside?
       board_1 << choice_1.choice
@@ -102,15 +94,13 @@ until breakpoint.zero?
 
   sleep(1)
 
-
-  game_board(board_tokens)
+  tokens.game_board
 
   if breakpoint.zero?
     puts 'the game ended in a draw'
     break
   end
 
-  
   first_player = Logic.new(board_1)
 
   if first_player.winning_position?
@@ -121,7 +111,7 @@ until breakpoint.zero?
   puts "#{player_2.name} turn please choose between #{board}"
 
   loop do
-    choice_2 = Position.new(gets.chomp.to_i, board) # rubocop:todo Naming/VariableNumber
+    choice_2 = Position.new(gets.chomp.to_i, board) 
     operation = ArrayOperation.new(board, choice_2.choice)
     if choice_2.inside?
       board_2 << choice_2.choice
@@ -135,7 +125,7 @@ until breakpoint.zero?
     end
   end
 
-  #game_board(board_tokens)
+  tokens.game_board
 
   second_player = Logic.new(board_2)
 
@@ -144,5 +134,3 @@ until breakpoint.zero?
     break
   end
 end
-# rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/PerceivedComplexity

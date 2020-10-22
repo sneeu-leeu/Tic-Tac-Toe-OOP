@@ -22,4 +22,5 @@ class Compare
   def is_missing?
     @item_1.empty? || @item_2.empty?
   end
+
 end
