@@ -7,7 +7,7 @@ class Board
   def display
     tables = ''
     display_board.each_with_index do |element, index|
-      tables += "#{element}" if [2, 5, 8].include?(index)
+      tables += element.to_s if [2, 5, 8].include?(index)
       tables += "\n-----------\n" if [2, 5].include?(index)
       tables += "#{element} | " unless [2, 5, 8].include?(index)
     end
@@ -18,8 +18,7 @@ class Board
     display_board[position] = sign
   end
 
-  def is_valid?(content)
+  def is_valid?(content) # rubocop:todo Naming/PredicateName
     @display_board.include?(content)
   end
 end
-
