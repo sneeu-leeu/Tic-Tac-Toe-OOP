@@ -6,7 +6,6 @@ require_relative '../lib/board'
 puts 'Welcome to tic tac toe  ---  Developed by Tahiry & Stephan'
 puts
 sleep 1
-
 while true
   puts 'Player 1, Please enter your name'
 
