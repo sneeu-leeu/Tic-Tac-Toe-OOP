@@ -9,7 +9,7 @@ sleep 1
 
 # rubocop:disable Lint/LiteralAsCondition
 while true
-# rubocop:enable Lint/LiteralAsCondition
+  # rubocop:enable Lint/LiteralAsCondition
   puts 'Player 1, Please enter your name'
 
   player_1 = Players.new(gets.chomp) # rubocop:todo Naming/VariableNumber
