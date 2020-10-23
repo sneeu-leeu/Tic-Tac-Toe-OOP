@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require_relative '../lib/player'
-require_relative '../lib/logic'
+require_relative '../lib/winner'
 require_relative '../lib/board'
 
 puts 'Welcome to tic tac toe'
@@ -43,33 +43,6 @@ end
 sleep(1)
 
 
-board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-board_tokens = []
-
-tokens = Board.new(board_tokens)
-
-board_1 = [] # rubocop:todo Naming/VariableNumber
-
-board_2 = [] # rubocop:todo Naming/VariableNumber
-
-breakpoint = board.length
-
-puts 'This is your game board.'
-    puts 'The numbers represent the cell you can choose'
-    
-    puts
-    puts ' 1 | 2 | 3'
-    puts '-----------'
-    puts ' 4 | 5 | 6 '
-    puts '-----------'
-    puts ' 7 | 8 | 9 '
-    puts
-    puts "#{player_1.name} your weapon is X"
-    puts
-    puts "#{player_2.name} your weapon is 0"
-sleep(2)
-
 puts
 puts 'The game commences in:'
 puts 3
@@ -79,64 +52,64 @@ sleep(1)
 puts 1
 sleep(1)
 
-until breakpoint.zero?
+first_player = Players.new(player_1.name,  'X', [])
+second_player = Players.new(player_2.name, 'O', [])
 
-  puts "#{player_1.name} it is your turn, please choose between #{board}"
+sleep(1)
+puts "#{player_1.name} you are #{first_player.sign}"
+puts "#{player_2.name} you are #{second_player.sign}"
+sleep(1)
 
-  loop do
-    choice_1 = Position.new(gets.chomp.to_i, board) # rubocop:todo Naming/VariableNumber
-    operation = ArrayOperation.new(board, choice_1.choice)
-    if choice_1.inside?
-      board_1 << choice_1.choice
-      operation.to_deleteArr
-      board_1.each { |token| board_tokens[token - 1] = 'X' }
-      breakpoint -= 1
+puts 'The game commences in:'
+puts 3
+sleep(1)
+puts 2
+sleep(1)
+puts 1
+sleep(1)
+
+board = Board.new
+
+round = 1
+
+winner = nil
+
+current_player = first_player
+
+while true
+
+  puts board.display
+
+  puts "Your turn #{current_player.name}"
+
+  choice = gets.chomp.to_i
+
+  while 
+    if board.is_valid?(choice)
+      board.update_board(choice-1, current_player.sign)
+      current_player.choice << choice
       break
     else
-      puts 'The selected cell is invalid!'
-      puts "please choose between #{board}"
+      puts "please chooose between the following board"
     end
   end
 
-  sleep(1)
+  is_winner = Winner.new(current_player.choice)
 
-  tokens.game_board
+  winner = current_player if is_winner.real_win?
 
-  if breakpoint.zero?
-    puts 'the game ended in a draw'
-    break
-  end
+  round += 1
 
-  first_player = Logic.new(board_1)
+  puts board.display if winner
+   
+  break if round > 9 || winner 
 
-  if first_player.winning_position?
-    puts "#{player_1.name}, you are the winner!"
-    break
-  end
+  current_player = current_player == first_player ? second_player : first_player
 
-  puts "#{player_2.name} turn please choose between #{board}"
+end
 
-  loop do
-    choice_2 = Position.new(gets.chomp.to_i, board) # rubocop:todo Naming/VariableNumber
-    operation = ArrayOperation.new(board, choice_2.choice)
-    if choice_2.inside?
-      board_2 << choice_2.choice
-      operation.to_deleteArr
-      board_2.each { |token| board_tokens[token - 1] = 'O' }
-      breakpoint -= 1
-      break
-    else
-      puts 'The selected cell is invalid or has already been taken!'
-      puts "please choose between #{board}"
-    end
-  end
-
-  tokens.game_board
-
-  second_player = Logic.new(board_2)
-
-  if second_player.winning_position?
-    puts "#{player_2.name}, you are the winner!"
-    break
-  end
+if winner.nil?
+  puts 'The game is ended in a draw!' 
+else
+  puts "congrats #{current_player.name}"
 end

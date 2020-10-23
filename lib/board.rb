@@ -1,17 +1,25 @@
-# rubocop:disable Metrics/CyclomaticComplexity
 class Board
-  attr_reader :tokens
-  def initialize(tokens)
-    @tokens = tokens
+  attr_reader :display_board
+  def initialize(display_board = [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    @display_board = display_board
   end
 
-  def game_board # rubocop:todo Metrics/PerceivedComplexity
-    puts " #{@tokens[0] || ' '} | #{@tokens[1] || ' '} | #{@tokens[2] || ' '} "
-    puts '-----------'
-    puts " #{@tokens[3] || ' '} | #{@tokens[4] || ' '} | #{@tokens[5] || ' '} "
-    puts '-----------'
-    puts " #{@tokens[6] || ' '} | #{@tokens[7] || ' '} | #{@tokens[8] || ' '} "
-    puts
+  def display
+    tables = ''
+    display_board.each_with_index do |element, index|
+      tables += "#{element}" if [2, 5, 8].include?(index)
+      tables += "\n-----------\n" if [2, 5].include?(index)
+      tables += "#{element} | " unless [2, 5, 8].include?(index)
+    end
+    tables
+  end
+
+  def update_board(position, sign)
+    display_board[position] = sign
+  end
+
+  def is_valid?(content)
+    @display_board.include?(content)
   end
 end
-# rubocop:enable Metrics/CyclomaticComplexity
+
