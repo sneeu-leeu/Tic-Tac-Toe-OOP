@@ -6,7 +6,10 @@ require_relative '../lib/board'
 puts 'Welcome to tic tac toe  ---  Developed by Tahiry & Stephan'
 puts
 sleep 1
+
+# rubocop:disable Lint/LiteralAsCondition
 while true
+# rubocop:enable Lint/LiteralAsCondition
   puts 'Player 1, Please enter your name'
 
   player_1 = Players.new(gets.chomp) # rubocop:todo Naming/VariableNumber
