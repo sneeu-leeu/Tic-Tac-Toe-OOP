@@ -4,7 +4,6 @@ require_relative '../lib/logic'
 require_relative '../lib/board'
 
 puts 'Welcome to tic tac toe'
-puts
 puts 'A simple game developed by Tahiry & Stephan'
 sleep 1
 

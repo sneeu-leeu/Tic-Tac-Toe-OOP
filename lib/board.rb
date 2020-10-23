@@ -1,21 +1,8 @@
 # rubocop:disable Metrics/CyclomaticComplexity
 class Board
-  attr_accessor :tokens
+  attr_reader :tokens
   def initialize(tokens)
     @tokens = tokens
-  end
-
-  def initial_board
-    puts 'This is your game board.'
-    puts 'The numbers represent the cell you can choose'
-
-    puts
-    puts ' 1 | 2 | 3'
-    puts '-----------'
-    puts ' 4 | 5 | 6 '
-    puts '-----------'
-    puts ' 7 | 8 | 9 '
-    puts
   end
 
   def game_board # rubocop:todo Metrics/PerceivedComplexity
