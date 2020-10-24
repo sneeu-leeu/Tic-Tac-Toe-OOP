@@ -7,28 +7,26 @@ puts 'Welcome to tic tac toe  ---  Developed by Tahiry & Stephan'
 puts
 sleep 1
 
-# rubocop:disable Lint/LiteralAsCondition
-while true
-  # rubocop:enable Lint/LiteralAsCondition
+game = true
+
+while game == true
+
   puts 'Player 1, Please enter your name'
+  player1 = Players.new(gets.chomp)
 
-  player_1 = Players.new(gets.chomp) # rubocop:todo Naming/VariableNumber
-
-  puts "Welcome #{player_1.name}" unless player_1.name.empty?
+  puts "Welcome #{player1.name}" unless player1.name.empty?
   puts
   sleep(1)
 
   puts 'Player 2, Please enter your name'
 
-  player_2 = Players.new(gets.chomp) # rubocop:todo Naming/VariableNumber
+  player2 = Players.new(gets.chomp)
 
-  unless (player_2.name.empty? || player_1.name.empty?) || player_2.name == player_1.name
-    puts "Welcome #{player_2.name}"
-  end
+  puts "Welcome #{player2.name}" unless (player2.name.empty? || player1.name.empty?) || player2.name == player1.name
   sleep(1)
   puts
 
-  compare = Compare.new(player_1.name, player_2.name)
+  compare = Compare.new(player1.name, player2.name)
 
   if compare.is_equal? && !compare.is_empty?
     puts 'Please enter a distinctive name'
@@ -40,17 +38,16 @@ while true
     puts 'Both names are required'
 
   else
-    break
+    game = false
   end
-
 end
 
-first_player = Players.new(player_1.name, 'X', [])
-second_player = Players.new(player_2.name, 'O', [])
+first_player = Players.new(player1.name, 'X', [])
+second_player = Players.new(player2.name, 'O', [])
 
 sleep(1)
-puts "#{player_1.name} you are #{first_player.sign}"
-puts "#{player_2.name} you are #{second_player.sign}"
+puts "#{player1.name} you are #{first_player.sign}"
+puts "#{player2.name} you are #{second_player.sign}"
 sleep(1)
 puts
 puts 'The game commences in:'
