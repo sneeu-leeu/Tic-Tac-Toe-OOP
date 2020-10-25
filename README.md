@@ -1,6 +1,7 @@
-# Tic-Tac-Toe Milestone 2
+# Tic-Tac-Toe Milestone 3
 
-> Create the user interface of the game
+> Fully enjoyable game of tic tac toe
+> Separate files with initialized classes
 
 ## Built With
 
