@@ -2,7 +2,7 @@
 
 ## Preview
 
-<img src="images/shot.gif>
+<img src="images/shot.gif">
 
 For this project, we wrote a Ruby executable script main.rb that allows the user to play the game of Tic, Tac, Toe in the Terminal.
 
