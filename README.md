@@ -31,7 +31,7 @@ In the event that all 9 squares are taken without either player getting three of
 
 ## Live Demo
 
-To quickly see our project in action, visit the [live demo]('https://repl.it/@StephanAnnandal/GrandioseDarkorchidError#main.rb') on repl.it.
+To quickly see our project in action, visit the [live demo](https://repl.it/@StephanAnnandal/GrandioseDarkorchidError#main.rb) on repl.it.
 
 There are no pre-requisites for enjoying the game through this method.
 
