@@ -74,15 +74,15 @@ loop do
   puts "Your turn #{current_player.name}"
 
   loop do
-     choice = gets.chomp.to_i 
-     if board.is_valid?(choice)
-       board.update_board(choice - 1, current_player.sign)
-       current_player.choice << choice
-       break
-     else
-       puts
-       puts "#{current_player.name}, please choose an available slot"
-     end
+    choice = gets.chomp.to_i
+    if board.is_valid?(choice)
+      board.update_board(choice - 1, current_player.sign)
+      current_player.choice << choice
+      break
+    else
+      puts
+      puts "#{current_player.name}, please choose an available slot"
+    end
   end
 
   is_winner = Winner.new(current_player.choice)
