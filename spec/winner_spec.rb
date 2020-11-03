@@ -1,4 +1,4 @@
-require './lib/winner'
+require_relative '../lib/winner'
 
 RSpec.describe Winner do
   let(:win_choices) { Winner.new([1, 2, 3]) }
@@ -13,8 +13,14 @@ RSpec.describe Winner do
     it 'Should let the player win if they have the correct combo' do
       expect(win_choices.real_win?).to be(true)
     end
+    it 'Should not let the player not win if they have the correct combo' do
+      expect(win_choices.real_win?).to_not be(false)
+    end
     it 'Should not let the player win if they have the wrong combo' do
       expect(loss_choices.real_win?).to be(false)
+    end
+    it 'Should not let the player not win if they have the right combo' do
+      expect(loss_choices.real_win?).to_not be(true)
     end
   end
 end
