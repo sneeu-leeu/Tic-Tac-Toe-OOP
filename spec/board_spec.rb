@@ -3,7 +3,12 @@ RSpec.describe Board do
   let(:board) { Board.new }
   let(:valid_move) { 8 }
   let(:invalid_move) { 12 }
+<<<<<<< HEAD
   let(:display_board) {[1, 2, 3, 4, 5, 6, 7, 8, 9]} 
+=======
+  let(:move1) { [8, 'X'] }
+
+>>>>>>> 925b978ab5c651e52bbe2318f625731cf9f84b89
   describe '#is_valid?' do
     it 'Should check if the selected move is valid' do
       expect(board.is_valid?(valid_move)).to be(true)
